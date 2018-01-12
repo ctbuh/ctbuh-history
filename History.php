@@ -1,9 +1,10 @@
 <?php
 
-namespace ctbuh;
+namespace ctbuh\History;
 
 use Illuminate\Database\Eloquent\Model;
 
+// http://www.laravel-auditing.com/docs/5.0/getting-audits
 class History extends Model {
 	
 	protected $table = 'history';
@@ -32,6 +33,7 @@ class History extends Model {
 		$this->model()->associate($model);
 	}
 	
+	// history()->setAUth("gdfgdf")->setSubject("gdfgdfg")->log("msg", "type", "extra")
 	public function log($message, $type = 'custom', $extra = array() ){
 		$this->type = $type;
 		$this->data = $message;

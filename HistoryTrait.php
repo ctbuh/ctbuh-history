@@ -1,6 +1,6 @@
 <?php
 
-namespace ctbuh;
+namespace ctbuh\History;
 
 use Illuminate\Database\Eloquent\Model;
 use ctbuh\History;
@@ -112,7 +112,7 @@ trait HistoryTrait {
 		
 		// extra data
 		$extra = array();
-		$extra['ip_address'] = request()->ip();
+		//$extra['ip_address'] = request()->ip();
 		
 		if(isset($params['extra'])){
 			$extra = array_merge($extra, $params['extra']);
