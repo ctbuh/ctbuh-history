@@ -6,7 +6,10 @@
 	"autoload": {
         "psr-4": {
             "ctbuh\\History\\": "/"
-        }
+        },
+		"files": [
+			"helpers.php"
+		]
     },
     "require": {}
 }
