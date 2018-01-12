@@ -1,0 +1,12 @@
+{
+    "name": "ctbuh/history",
+    "description": "track model changes",
+    "type": "library",
+    "license": "MIT",
+	"autoload": {
+        "psr-4": {
+            "ctbuh\\History\\": "/"
+        }
+    },
+    "require": {}
+}
