@@ -27,10 +27,12 @@ class History extends Model {
 	
 	public function setUser($user){
 		$this->user()->associate($user);
+		return $this;
 	}
 	
 	public function setModel($model){
 		$this->model()->associate($model);
+		return $this;
 	}
 	
 	// history()->setAUth("gdfgdf")->setSubject("gdfgdfg")->log("msg", "type", "extra")
