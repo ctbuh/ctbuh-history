@@ -3,7 +3,7 @@
 namespace ctbuh\History;
 
 use Illuminate\Database\Eloquent\Model;
-use ctbuh\History;
+use ctbuh\History\History;
 use Auth;
 
 trait HistoryTrait {
@@ -55,32 +55,11 @@ trait HistoryTrait {
 		return $this->morphMany(History::class, 'model')->orderBy('created_at', 'desc');
     }
 	
-	public function logCustom($message, $type = 'custom'){
-		return static::logHistory($message, $type);
-	}
-	
-	public function logHistory($message, $type = 'custom'){
-		return static::doLog($this, $message, array('type' => $type));
-	}
-	
-	/*
-	helper used to log changes for one to many to many to many
-	
-	 [relation] => images
-    [action] => detach
-    [ids] => 68906
-    [data] => Array
-	
-	*/
-	// log OneToMany
-	public function logRelation($relation, $action, $ids, $data){
-		// type: one_to_many
-	}
-	
-	// log ManyToMany
-	// https://github.com/laravel/framework/blob/5.4/src/Illuminate/Database/Eloquent/Relations/Concerns/InteractsWithPivotTable.php#L82
-	public function logSync($relation, $sync_ret){
-		// static::doLog($this, $sync_ret, array('type' => 'sync'));
+	public function logHistory($message, $type = 'custom', $extra = array() ){
+		return static::doLog($this, $message, array(
+			'type' => $type,
+			'extra' => $extra
+		));
 	}
 	
 	protected static function doLog($model, $data, $params = array() ){

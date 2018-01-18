@@ -35,13 +35,17 @@ class History extends Model {
 		return $this;
 	}
 	
+	public function logAction($message, $type = 'custom', $extra = array() ){
+		return $this->log($message, $type, $extra);
+	}
+	
 	// history()->setAUth("gdfgdf")->setSubject("gdfgdfg")->log("msg", "type", "extra")
 	public function log($message, $type = 'custom', $extra = array() ){
 		$this->type = $type;
 		$this->data = $message;
 		$this->extra = $extra;
 		
-		return $this->save();
+		return $this;
 	}
 }
 

@@ -13,7 +13,11 @@ class HistoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+		
+		$this->publishes(array(
+			__DIR__.'/migrations/' => database_path('migrations')
+		), 'migrations');
+		
     }
 
     /**
