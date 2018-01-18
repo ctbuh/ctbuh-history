@@ -42,8 +42,16 @@ class History extends Model {
 	
 	public function log($message, $type = 'custom', $extra = array() ){
 		$this->type = $type;
+		
+		// attribute casting does not exist on laravel 4!
+		if(!method_exists($this, 'castAttribute')){
+			$message = json_encode($message);
+			$extra = json_encode($extra);
+		}
+		
 		$this->data = $message;
 		$this->extra = $extra;
+		
 		$this->save();
 		
 		return $this;
