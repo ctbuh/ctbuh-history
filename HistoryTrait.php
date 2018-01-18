@@ -63,43 +63,33 @@ trait HistoryTrait {
 	}
 	
 	protected static function doLog($model, $data, $params = array() ){
-		$data = $data;
 		
 		// we want to allow empty to log empty package/tour selections
 		if(empty($data) && !isset($params['allow_empty']) ){
-			return;
+			return null;
 		}
 		
 		$record = new History();
 		
 		// who did it?
 		if(Auth::check()){
-			$record->user()->associate(Auth::user());
+			$record->setUser(Auth::user());
 		}
 		
 		// to whom?
 		if($model instanceof Model){
-			$record->model()->associate($model);
+			$record->setModel($model);
 		}
 		
 		// what sort of record is this? usually "update"
-		if(isset($params['type'])){
-			$record->type = (string)$params['type'];
-		}
+		$type = isset($params['type']) ? (string)$params['type'] : 'custom';
 		
-		$record->data = $data;
-		
-		// extra data
 		$extra = array();
-		//$extra['ip_address'] = request()->ip();
-		
 		if(isset($params['extra'])){
 			$extra = array_merge($extra, $params['extra']);
 		}
 		
-		$record->extra = $extra;
-		
-		return $record->save();
+		return $record->logAction($data, $type, $extra);
 	}
 	
 	// https://github.com/VentureCraft/revisionable/blob/master/src/Venturecraft/Revisionable/RevisionableTrait.php#L53
