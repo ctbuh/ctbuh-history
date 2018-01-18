@@ -55,7 +55,7 @@ trait HistoryTrait {
 		return $this->morphMany(History::class, 'model')->orderBy('created_at', 'desc');
     }
 	
-	public function logHistory($message, $type = 'custom', $extra = array() ){
+	public function logAction($message, $type = 'custom', $extra = array() ){
 		return static::doLog($this, $message, array(
 			'type' => $type,
 			'extra' => $extra
