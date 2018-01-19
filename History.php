@@ -45,6 +45,15 @@ class History extends Model {
 		
 		// attribute casting does not exist on laravel 4!
 		if(!method_exists($this, 'castAttribute')){
+			
+			if(method_exists($message, 'toArray')){
+				$message = $message->toArray();
+			}
+			
+			if(method_exists($extra, 'toArray')){
+				$extra = $extra->toArray();
+			}
+			
 			$message = json_encode($message);
 			$extra = json_encode($extra);
 		}
